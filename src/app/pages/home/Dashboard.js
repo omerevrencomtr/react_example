@@ -75,11 +75,11 @@ export default function Dashboard() {
     let currencies: [];
     axios.get(`https://jsonplaceholder.typicode.com/users`)
         .then(res => {
-            currencies = res.data;
-            setValues.currencies = currencies;
-            // values.currencies = currencies
-            // handleChange('currencies');
-            console.info(values.currencies);
+            currencies = res.data.map(function (data) {
+                return <Dropdown.Item>{data.name}</Dropdown.Item>;
+            });
+            setValues({currencies:currencies})
+
         });
 
     var data = [
@@ -140,10 +140,7 @@ export default function Dashboard() {
                                 id="input-group-dropdown-2"
                             >
 
-                                {
-                                   console.log(values.currencies)
-                                }
-
+                                {values.currencies}
                                 <Dropdown.Item href="#">BTC</Dropdown.Item>
                                 <Dropdown.Item href="#">ETH</Dropdown.Item>
                                 <Dropdown.Item href="#">TEST</Dropdown.Item>
